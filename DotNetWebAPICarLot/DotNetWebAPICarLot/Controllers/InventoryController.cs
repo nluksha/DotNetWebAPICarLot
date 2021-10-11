@@ -78,6 +78,32 @@ namespace DotNetWebAPICarLot.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        [HttpPost, Route("")]
+        [ResponseType(typeof(Inventory))]
+        public IHttpActionResult PostInventory(Inventory inventory)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                inventoryRepository.Add(inventory);
+
+            }
+            catch (Exception ex)
+            {
+                // todo: handel exception
+                throw;
+            }
+
+            return CreatedAtRoute("DisplayRoute", new { id = inventory.Id }, inventory);
+        }
+
+
+
+
         /*
         [HttpGet, Route("")]
         public IEnumerable<string> Get()

@@ -13,8 +13,9 @@ namespace DotNetWebAPICarLot
     {
         protected void Application_Start()
         {
-            GlobalConfiguration.Configure(WebApiConfig.Register);
             Database.SetInitializer(new MyDataInitializer());
+
+            GlobalConfiguration.Configure(WebApiConfig.Register);
         }
     }
 }

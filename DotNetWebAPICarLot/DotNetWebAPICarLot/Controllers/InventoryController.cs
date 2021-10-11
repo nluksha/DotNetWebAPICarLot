@@ -101,6 +101,29 @@ namespace DotNetWebAPICarLot.Controllers
             return CreatedAtRoute("DisplayRoute", new { id = inventory.Id }, inventory);
         }
 
+        [HttpDelete, Route("{id}")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult DeleteInventory(int id, Inventory inventory)
+        {
+            if (id != inventory.Id)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                inventoryRepository.Delete(inventory);
+
+            }
+            catch (Exception ex)
+            {
+                // todo: handel exception
+                throw;
+            }
+
+            return Ok();
+        }
+
 
 
 
